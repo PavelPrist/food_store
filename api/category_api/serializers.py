@@ -11,6 +11,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     subcategories = SubCategorySerializer(many=True)
+
     class Meta:
         model = Category
         fields = '__all__'
