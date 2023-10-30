@@ -10,6 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
         return format_html(
             f'<img src="{obj.image.url}" width="{width}" height="{height}" />'
         )
+
     def image_tag(self, obj):
         return self.form_html(obj, 150, 150)
 
@@ -19,7 +20,7 @@ class CategoryAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
     list_editable = ('name', 'image')
     readonly_fields = ('image_tag',)
-    image_tag.short_description='Изображение 150x150'
+    image_tag.short_description = 'Изображение 150x150'
 
 
 @admin.register(SubCategory)
@@ -32,6 +33,7 @@ class SubCategoryAdmin(CategoryAdmin):
 class ProductAdmin(CategoryAdmin):
     def image_tag_middle(self, obj):
         return self.form_html(obj, 100, 100)
+
     def image_tag_small(self, obj):
         return self.form_html(obj, 50, 50)
     list_display = (
