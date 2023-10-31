@@ -1,5 +1,4 @@
-from rest_framework import status, viewsets
-from rest_framework.response import Response
+from rest_framework import viewsets
 
 from api.cart_api.serializers import CartCreateSerializer, CartListSerializer
 from api.paginations import CustomPageNumberPagination
@@ -20,4 +19,5 @@ class CartViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)

@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.db import models
 
 from users.models import User
@@ -21,7 +20,6 @@ class Cart(models.Model):
     def __str__(self):
         return f'Корзина пользователя {self.user}'
 
-
     # @admin.display(ordering='get_total_price')
     # def get_total_price(self):
     #     return sum(item.get_total_price for item in self.items.all())
@@ -29,7 +27,6 @@ class Cart(models.Model):
     # @admin.display(ordering='get_total_quantity')
     # def get_total_quantity(self):
     #     return sum(item.quantity for item in self.items.all())
-
     class Meta:
         ordering = ('-created_at',)
         verbose_name = 'корзина'
