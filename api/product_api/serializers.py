@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from api.category_api.serializers import CategorySerializer
-from store.models import Category, Product
+from store.models import Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -9,9 +8,6 @@ class ProductSerializer(serializers.ModelSerializer):
         slug_field='name',
         read_only=True,
     )
-    # category = CategorySerializer(
-    #     read_only=True, source='subcategory.category'
-    # )
     category = serializers.ReadOnlyField(source='subcategory.category.name')
 
     class Meta:

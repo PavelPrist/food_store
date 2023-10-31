@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'djoser',
     'store.apps.StoreConfig',
     'users.apps.UsersConfig',
+    'api.apps.ApiConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -156,7 +158,7 @@ DJOSER = {
 
 SIMPLE_JWT = {
     # Устанавливаем срок жизни токена
-   'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+   'ACCESS_TOKEN_LIFETIME': timedelta(days=10),
    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
@@ -164,3 +166,5 @@ AUTH_USER_MODEL = 'users.User'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CART_SESSION_ID = 'cart'

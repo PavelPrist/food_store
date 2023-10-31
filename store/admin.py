@@ -47,7 +47,9 @@ class ProductAdmin(CategoryAdmin):
         'image_tag_small',
         'image',
     )
-    list_editable = ('name', 'image', 'subcategory', 'price', 'description')
+    list_editable = ('image', 'subcategory', 'price', 'description')
     readonly_fields = ('image_tag', 'image_tag_middle', 'image_tag_small')
     image_tag_middle.short_description = 'Изображение 100x100'
     image_tag_small.short_description = 'Изображение 50x50'
+    prepopulated_fields = {'slug': ('name',)}
+    list_display_links = ('id', 'name')

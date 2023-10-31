@@ -109,6 +109,7 @@ class Product(SlugBaseModel):
         ordering = ('name',)
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
-        index_together = [
-            ['id', 'slug'],
+        indexes = [
+            models.Index(fields=['id', 'slug']),
+            models.Index(fields=['name']),
         ]
