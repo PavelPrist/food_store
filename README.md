@@ -16,7 +16,7 @@ Django-проект для магазина продуктов
 Для Windows:
 
 ```shell
-git clone git@github.com:elityaev/Django-shop.git
+git clone git@github.com:PavelPrist/food_store.git
 cd Django-shop
 python -m venv venv
 venv/Scripts/activate
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 Для Linux:
 
 ```shell
-git clone git@github.com:elityaev/Django-shop.git
+git clone git@github.com:PavelPrist/food_store.git
 cd Django-shop
 python3 -m venv venv
 source venv/bin/activat
