@@ -30,9 +30,6 @@ class Cart(models.Model):
     def get_total_quantity(self):
         return sum(item.quantity for item in self.items.all())
 
-    @admin.display(ordering='get_product_price', description='Цена')
-    def get_product_price(self):
-        return self.item.get_price()
 
     class Meta:
         ordering = ('-created_at',)
