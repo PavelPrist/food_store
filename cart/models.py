@@ -21,13 +21,18 @@ class Cart(models.Model):
     def __str__(self):
         return f'Корзина пользователя {self.user}'
 
-    @admin.display(ordering='get_total_price')
+    @admin.display(ordering='get_total_price', description='Общая стоимость')
     def get_total_price(self):
         return sum(item.get_cost() for item in self.items.all())
 
-    @admin.display(ordering='get_total_quantity')
+    @admin.display(
+        ordering='get_total_quantity', description='Общее количество')
     def get_total_quantity(self):
         return sum(item.quantity for item in self.items.all())
+
+    @admin.display(ordering='get_product_price', description='Цена')
+    def get_product_price(self):
+        return self.item.get_price()
 
     class Meta:
         ordering = ('-created_at',)
@@ -55,6 +60,9 @@ class CartItem(models.Model):
 
     def get_cost(self):
         return self.product.price * self.quantity
+
+    def __str__(self):
+        return f'{self.product.name}, Цена: {self.product.price}'
 
     class Meta:
         ordering = ('id',)

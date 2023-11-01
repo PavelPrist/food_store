@@ -1,11 +1,12 @@
 from django.contrib import admin
 
 from cart.models import Cart, CartItem
+from store.models import Product
 
 
-class CartItemInline(admin.TabularInline):
+class CartItemProductInline(admin.StackedInline):
     model = CartItem
-    raw_id_fields = ['product']
+    raw_id_fields = ['product', ]
 
 
 @admin.register(Cart)
@@ -20,4 +21,4 @@ class CartAdmin(admin.ModelAdmin):
         'get_total_quantity',
     )
     list_filter = ('user', 'created_at', 'updated_at',)
-    inlines = [CartItemInline]
+    inlines = [CartItemProductInline]
