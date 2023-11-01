@@ -80,3 +80,6 @@ http://127.0.0.1:8000/  по адресу можно посмотреть
 
 ## Авторы
 [Павел](https://github.com/PavelPrist)
+
+## Ссылка не схему моделей
+https://disk.yandex.ru/i/xpXoVPR9lD1gEQ

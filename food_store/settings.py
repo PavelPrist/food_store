@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
+    'django_extensions',
     'sorl.thumbnail',
     'rest_framework',
+    'rest_framework_swagger',
     'djoser',
     'store.apps.StoreConfig',
     'users.apps.UsersConfig',
@@ -170,3 +172,8 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CART_SESSION_ID = 'cart'
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
