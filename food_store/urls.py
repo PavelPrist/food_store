@@ -2,9 +2,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework_swagger.views import get_swagger_view
+# from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,7 +11,9 @@ urlpatterns = [
     path('api/', include('api.category_api.urls')),
     path('api/', include('api.product_api.urls')),
     path('api/', include('api.cart_api.urls')),
-    path('swagger/', schema_view),
+    # path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'),
+    #      name='docs'),
 ]
 
 if settings.DEBUG:
