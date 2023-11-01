@@ -16,8 +16,8 @@ class CartAdmin(admin.ModelAdmin):
         'user',
         'created_at',
         'updated_at',
-        # 'get_total_price',
-        # 'get_total_quantity',
+        'get_total_price',
+        'get_total_quantity',
     )
     list_filter = ('user', 'created_at', 'updated_at',)
     inlines = [CartItemInline]
