@@ -1,4 +1,8 @@
 from django.db import models
+from django.utils.safestring import mark_safe
+from django_cleanup.signals import cleanup_pre_delete
+
+from sorl.thumbnail import delete, get_thumbnail
 
 
 class SlugBaseModel(models.Model):
@@ -113,3 +117,40 @@ class Product(SlugBaseModel):
             models.Index(fields=['id', 'slug']),
             models.Index(fields=['name']),
         ]
+
+
+class ImageGalleryModel(models.Model):
+    image = models.ImageField(
+        'Будет приведено к ширине 300px',
+        upload_to='product_gallery/%Y/%m/',
+        default=''
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='gallery',
+        verbose_name='продукт',
+        help_text='Фото товара'
+    )
+
+    @property
+    def get_image_300x300(self):
+        return get_thumbnail(self.image, '300x300', crop='center', quality=51)
+
+    def sorl_delete(**kwargs):
+        delete(kwargs['file'])
+
+    cleanup_pre_delete.connect(sorl_delete)
+
+    def image_tmb(self):
+        if self.image:
+            return mark_safe(f'<img src="{self.get_image_300x300.url}">')
+        return 'Нет изображения'
+
+    image_tmb.short_description = 'изображение для галереи'
+    image_tmb.allow_tags = True
+
+    class Meta:
+        default_related_name = 'gallery'
+        verbose_name = 'изображение для галереи'
+        verbose_name_plural = 'изображения для галереи'

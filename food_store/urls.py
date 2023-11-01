@@ -9,4 +9,12 @@ urlpatterns = [
     path('api/', include('api.category_api.urls')),
     path('api/', include('api.product_api.urls')),
     path('api/', include('api.cart_api.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    from api.schema import schema
+    urlpatterns.append(
+        path('', schema)
+    )
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # noqa

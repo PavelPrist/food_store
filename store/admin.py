@@ -1,7 +1,14 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Category, SubCategory, Product
+from .models import Category, ImageGalleryModel, SubCategory, Product
+
+
+class GalleryImageInline(admin.TabularInline):
+    model = ImageGalleryModel
+    readonly_fields = ('image_tmb',)
+    fields = ('image', 'image_tmb')
+    extra = 3
 
 
 @admin.register(Category)
@@ -36,6 +43,7 @@ class ProductAdmin(CategoryAdmin):
 
     def image_tag_small(self, obj):
         return self.form_html(obj, 50, 50)
+
     list_display = (
         'id',
         'name',
@@ -53,3 +61,9 @@ class ProductAdmin(CategoryAdmin):
     image_tag_small.short_description = 'Изображение 50x50'
     prepopulated_fields = {'slug': ('name',)}
     list_display_links = ('id', 'name')
+    inlines = [GalleryImageInline]
+
+
+@admin.register(ImageGalleryModel)
+class ImageGalleryModelAdmin(admin.ModelAdmin):
+    list_display = ('image_tmb', 'product')
